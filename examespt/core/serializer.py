@@ -17,7 +17,7 @@ class UniversitySerializer(serializers.ModelSerializer):
 class InstituteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Institute
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'university')
 
 
 class ExamSerializer(serializers.ModelSerializer):

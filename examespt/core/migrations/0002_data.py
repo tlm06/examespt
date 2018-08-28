@@ -9,12 +9,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
 def data(apps, schema_editor):
-    data_districts(apps, schema_editor)
-    data_universities(apps, schema_editor)
-    data_institutes(apps, schema_editor)
+    data_districts(apps)
+    data_universities(apps)
+    data_institutes(apps)
+    data_season(apps)
 
 
-def data_districts(apps, schema_editor):
+def data_districts(apps):
     District = apps.get_model('core', 'District')
 
     with open(os.path.join(BASE_DIR, 'data/districts.csv')) as district_data:
@@ -23,7 +24,20 @@ def data_districts(apps, schema_editor):
             District.objects.create(name=district[0])
 
 
-def data_universities(apps, schema_editor):
+def data_season(apps):
+    Season = apps.get_model('core', 'Season')
+
+    data_season = [
+        (1, "Época Normal"),
+        (2, "Época Recurso"),
+        (3, "Época Especial"),
+    ]
+
+    for id, name in data_season:
+        Season.objects.create(id=id, name=name)
+
+
+def data_universities(apps):
     University = apps.get_model('core', 'University')
     District = apps.get_model('core', 'District')
     with open(os.path.join(BASE_DIR, 'data/institute_course.csv')) as institute_course_data:
@@ -42,7 +56,7 @@ def data_universities(apps, schema_editor):
                                 University.objects.create(name=split[0], location=dist_obj)
 
 
-def data_institutes(apps, schema_editor):
+def data_institutes(apps):
     University = apps.get_model('core', 'University')
     Institute = apps.get_model('core', 'Institute')
     with open(os.path.join(BASE_DIR, 'data/institute_course.csv')) as institute_course_data:
