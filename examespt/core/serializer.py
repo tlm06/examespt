@@ -1,23 +1,29 @@
-from .models import Platform, Game, Player, Videogame
+from .models import University, Institute, District, Exam
 from rest_framework import serializers
 
 
-class PlayerSerializer(serializers.ModelSerializer):
+class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Player
-        fields = ('id', 'mail', 'first_name', 'last_name', 'pc_gamer_tag', 'ps4_gamer_tag', 'xbox_gamer_tag')
-
-
-class PlatformSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Platform
+        model = District
         fields = ('id', 'name')
 
 
-class GameSerializer(serializers.ModelSerializer):
+class UniversitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Game
-        fields = ('platform', 'videogame', 'created_by', 'opponent', 'has_started', 'winner')
+        model = University
+        fields = ('id', 'name', 'location')
+
+
+class InstituteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Institute
+        fields = ('id', 'name')
+
+
+class ExamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exam
+        fields = ('id', 'name', 'course')
 
 
 
