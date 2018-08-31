@@ -13,9 +13,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import environ
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+env = environ.Env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-]
+    'django_filters'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,15 +79,9 @@ WSGI_APPLICATION = 'examespt.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'examespt',
-        'USER': 'telmo',
-        'PASSWORD': 'f4f',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+    'default': env.db('DATABASE_URL', default='postgres:///examespt'),
 }
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Password validation

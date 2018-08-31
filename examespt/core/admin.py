@@ -1,15 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from examespt.core.models import District, University, Institute, Course, Exam
+from examespt.core.models import District, Institute, Course, Exam
 
 
 class DistrictAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
-
-
-class UniversityAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'location')
 
 
 class InstituteAdmin(admin.ModelAdmin):
@@ -25,7 +21,6 @@ class ExamAdmin(admin.ModelAdmin):
 
 
 admin.site.register(District, DistrictAdmin)
-admin.site.register(University, UniversityAdmin)
 admin.site.register(Institute, InstituteAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Exam, ExamAdmin)

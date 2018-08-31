@@ -20,10 +20,10 @@ from examespt.core import views as coreviews
 
 router = routers.DefaultRouter()
 router.register(r'district', coreviews.DistrictViewSet)
-router.register(r'university', coreviews.UniversityViewSet)
 router.register(r'institute', coreviews.InstituteViewSet)
 router.register(r'exam', coreviews.ExamViewSet)
-
+router.register(r'course', coreviews.CourseViewSet)
+router.register(r'courseunit', coreviews.CourseUnitViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^rest/', include(router.urls)),

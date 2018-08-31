@@ -4,7 +4,7 @@ from django.db import models
 
 
 class BaseClass(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=250)
 
     class Meta:
         abstract = True
@@ -21,29 +21,27 @@ class Season(BaseClass):
     pass
 
 
-class University(BaseClass):
-    location = models.ForeignKey(District)
-
-
 class Institute(BaseClass):
-    university = models.ForeignKey(University, null=True)
+    district = models.ForeignKey(District)
 
 
 class Course(BaseClass):
-    institute = models.ForeignKey(Institute)
+    institute = models.ForeignKey(Institute, related_name='courses')
 
     def __str__(self):
         return self.institute.name + ' - ' + self.name
 
 
 class CourseUnit(BaseClass):
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, related_name='courseunits')
+    semester = models.PositiveSmallIntegerField()
+    year = models.SmallIntegerField()
 
 
 class Exam(BaseClass):
-    course = models.ForeignKey(Course)
+    courseunit = models.ForeignKey(CourseUnit)
     season = models.ForeignKey(Season)
-    semester = models.PositiveSmallIntegerField()
+    year = models.SmallIntegerField()
 
 
 class Question(models.Model):

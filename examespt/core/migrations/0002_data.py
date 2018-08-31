@@ -17,7 +17,7 @@ def data(apps, schema_editor):
 def data_districts(apps):
     District = apps.get_model('core', 'District')
 
-    with open(os.path.join(BASE_DIR, 'data/core/data/districts.csv')) as district_data:
+    with open(os.path.join(BASE_DIR, 'data/districts.csv')) as district_data:
         data = csv.reader(district_data)
         for district in data:
             District.objects.create(name=district[0])
@@ -39,10 +39,10 @@ def data_season(apps):
 def data_institutes(apps):
     Institute = apps.get_model('core', 'Institute')
     District = apps.get_model('core', 'District')
-    with open(os.path.join(BASE_DIR, 'data/core/data/institute_course.csv')) as institute_course_data:
+    with open(os.path.join(BASE_DIR, 'data/institute_course.csv')) as institute_course_data:
         data = csv.reader(institute_course_data)
         for univ, course in data:
-            with open(os.path.join(BASE_DIR, 'data/core/data/districts.csv')) as district_data:
+            with open(os.path.join(BASE_DIR, 'data/districts.csv')) as district_data:
                 d_data = csv.reader(district_data)
                 for district in d_data:
                     if district[0] in univ:
